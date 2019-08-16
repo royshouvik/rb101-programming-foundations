@@ -1,16 +1,20 @@
 require 'yaml'
 MESSAGES = YAML.load_file('calculator_messages.yml')
-# puts MESSAGES.inspect
+
 
 OP_VERB = {
-  "1" => MESSAGES["op_add"],
-  "2" => MESSAGES["op_sub"],
-  "3" => MESSAGES["op_mul"],
-  "4" => MESSAGES["op_div"]
+  "1" => "op_add",
+  "2" => "op_sub",
+  "3" => "op_mul",
+  "4" => "op_div"
 }
 
 def prompt(message)
-  puts "=> #{message}"
+  if MESSAGES.has_key? message
+    puts "=> #{MESSAGES[message]}"
+  else
+    puts "=> #{message}"
+  end
 end
 
 def valid_number?(num)
@@ -36,28 +40,28 @@ def get_number_input(message)
     if valid_number?(input)
       break format_number(input)
     else
-      prompt(MESSAGES["number_error"])
+      prompt "number_error"
     end
   end
 end
 
 def get_op_input
-  prompt(MESSAGES["operator_prompt"])
+  prompt "operator_prompt"
   
   loop do
     input = gets.chomp
     if %w(1 2 3 4).include?(input)
       break input
     else
-      prompt(MESSAGES["operator_error"])
+      prompt "operator_error"
     end
   end
 end
 
 def calculate
   loop do
-    number1 = get_number_input(MESSAGES["number1_prompt"])
-    number2 = get_number_input(MESSAGES["number2_prompt"])
+    number1 = get_number_input("number1_prompt")
+    number2 = get_number_input("number2_prompt")
     operator = get_op_input
 
     prompt "#{OP_VERB[operator]} #{MESSAGES["op_message"]}"
@@ -71,7 +75,7 @@ def calculate
 
     prompt "#{MESSAGES["result"]} #{result}"
 
-    prompt MESSAGES["again_prompt"]
+    prompt "again_prompt"
     answer = gets.chomp
     break unless answer.downcase.start_with?('y')
   end
@@ -81,7 +85,7 @@ def get_name
   loop do
     name = gets.chomp
     if name.empty?
-      prompt MESSAGES["name_error"]
+      prompt "name_error"
     else
       break name.downcase.capitalize
     end
@@ -89,7 +93,7 @@ def get_name
 end
 
 def greet
-  prompt MESSAGES["welcome"]
+  prompt "welcome"
   name = get_name
   prompt "#{MESSAGES["hi"]} #{name}!"
 end
@@ -97,7 +101,7 @@ end
 def main
   greet
   calculate
-  prompt MESSAGES["bye"]
+  prompt "bye"
 end
 
 main
