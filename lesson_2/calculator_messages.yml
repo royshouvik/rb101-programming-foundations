@@ -1,0 +1,20 @@
+welcome: "Welcome to Calculator! Enter your name:"
+bye: "Thank you for using the calculator. Good bye!"
+hi: "Hi"
+name_error: "Make sure to use a valid name"
+number1_prompt: "What's the first number?"
+number2_prompt: "What's the second number?"
+number_error: "That doesn't look like a valid number"
+operator_prompt: "Enter the operation to perform:\n
+    1 - Addition\n
+    2 - Subtraction\n
+    3 - Multiplication and\n
+    4 - Division"
+operator_error: "Must choose 1, 2, 3 or 4"
+result: "The result is"
+again_prompt: "Do you want to perform another calculation? (Y to calculate again)"
+op_add: "Adding"
+op_sub: "Subtracting"
+op_mul: "Multiplying"
+op_div: "Dividing"
+op_message: "the two numbers..."

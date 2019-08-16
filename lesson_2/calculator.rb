@@ -1,14 +1,14 @@
-puts 'Enter the first number'
+puts "Enter the first number"
 number1 = gets.chomp
 
-puts 'Enter the second number'
+puts "Enter the second number"
 number2 = gets.chomp
 
-puts 'Enter the operation to perform:
+puts "Enter the operation to perform:
 1 - Addition,
 2 - Subtraction,
 3 - Multiplication and
-4 - Division'
+4 - Division"
 
 operator = gets.chomp
 
