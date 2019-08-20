@@ -33,7 +33,7 @@ WINNING_MESSAGE = {
 INITIAL_SCORE = {
   user: 0,
   computer: 0
-}
+}.freeze
 
 def prompt(message)
   puts "=> #{message}"
@@ -47,6 +47,12 @@ def get_user_choice
   loop do
     prompt "Enter your choice (#{VALID_CHOICES.join(', ')})"
     choice = gets.chomp
+
+    # Try to find a matching choice if user
+    # entered 1 or 2 letter choice
+    if choice.length <= 2
+      choice = VALID_CHOICES.find { |word| word.start_with?(choice) }
+    end
     break choice if valid_choice?(choice)
 
     prompt "That's not a valid choice"
@@ -101,7 +107,7 @@ def game_over?(score)
 end
 
 def update_score(score, result)
-  updated_score = score.clone
+  updated_score = score.dup
   if result == -1
     updated_score[:computer] += 1
   elsif result == 1
@@ -111,7 +117,7 @@ def update_score(score, result)
 end
 
 def display_grand_winner(score)
-  if (score[:user] > score[:computer])
+  if score[:user] > score[:computer]
     prompt "You are the GRAND WINNER!!!"
   else
     prompt "Computer is the GRAND WINNER!!!"
@@ -124,7 +130,7 @@ def play_game(score)
     computer_choice = get_computer_choice
 
     prompt "You chose #{choice}, computer chose #{computer_choice}"
-    
+
     computed_result = result(choice, computer_choice)
     winning_msg = winning_message(choice, computer_choice)
     result_msg = result_message(computed_result)
@@ -142,8 +148,6 @@ end
 
 prompt 'Welcome to Rock, Paper, Scissors, Lizard, Spock!'
 updated_score = play_game(INITIAL_SCORE)
-if updated_score
-  display_grand_winner(updated_score)
-end
+display_grand_winner(updated_score) if updated_score
 
 prompt 'Thanks for playing. Have a good day!'
