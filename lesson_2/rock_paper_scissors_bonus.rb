@@ -18,16 +18,16 @@ WINNING_CHOICES = [
 ]
 
 WINNING_MESSAGE = {
-  Set['scissors', 'paper']  => "Scissors cut Paper",
-  Set['paper', 'rock']      => "Paper covers Rock",
-  Set['rock', 'lizard']     => "Rock crushes Lizard",
-  Set['lizard', 'spock']    => "Lizard poisons Spock",
-  Set['spock', 'scissors']  => "Spock smashes Scissors",
-  Set['scissors', 'lizard'] => "Scissors decapitate Lizard",
-  Set['lizard', 'paper']    => "Lizard eats Paper",
-  Set['paper', 'spock']     => "Paper disproves Spock",
-  Set['spock', 'rock']      => "Spock vaporizes Rock",
-  Set['rock', 'scissors']   => "Rock crushes Scissors"
+  Set['scissors', 'paper'] => 'Scissors cut Paper',
+  Set['paper', 'rock'] => 'Paper covers Rock',
+  Set['rock', 'lizard'] => 'Rock crushes Lizard',
+  Set['lizard', 'spock'] => 'Lizard poisons Spock',
+  Set['spock', 'scissors'] => 'Spock smashes Scissors',
+  Set['scissors', 'lizard'] => 'Scissors decapitate Lizard',
+  Set['lizard', 'paper'] => 'Lizard eats Paper',
+  Set['paper', 'spock'] => 'Paper disproves Spock',
+  Set['spock', 'rock'] => 'Spock vaporizes Rock',
+  Set['rock', 'scissors'] => 'Rock crushes Scissors'
 }
 
 INITIAL_SCORE = {
@@ -43,7 +43,7 @@ def valid_choice?(choice)
   VALID_CHOICES.include?(choice)
 end
 
-def get_user_choice
+def user_choice
   loop do
     prompt "Enter your choice (#{VALID_CHOICES.join(', ')})"
     choice = gets.chomp
@@ -59,7 +59,7 @@ def get_user_choice
   end
 end
 
-def get_computer_choice
+def computer_choice
   VALID_CHOICES.sample
 end
 
@@ -128,15 +128,20 @@ def display_grand_winner(score)
   end
 end
 
+def turn_choices
+  choice = user_choice
+  comp_choice = computer_choice
+  [choice, comp_choice]
+end
+
 def play_game(score)
   loop do
-    choice = get_user_choice
-    computer_choice = get_computer_choice
+    choice, comp_choice = turn_choices
 
-    prompt "You chose #{choice}, computer chose #{computer_choice}"
+    prompt "You chose #{choice}, computer chose #{comp_choice}"
 
-    computed_result = result(choice, computer_choice)
-    winning_msg = winning_message(choice, computer_choice)
+    computed_result = result(choice, comp_choice)
+    winning_msg = winning_message(choice, comp_choice)
     result_msg = result_message(computed_result)
     score = update_score(score, computed_result)
 
