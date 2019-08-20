@@ -116,6 +116,10 @@ def update_score(score, result)
   updated_score
 end
 
+def display_score(score)
+  prompt "Score: User #{score[:user]} Computer #{score[:computer]}"
+end
+
 def display_grand_winner(score)
   if score[:user] > score[:computer]
     prompt "You are the GRAND WINNER!!!"
@@ -137,6 +141,7 @@ def play_game(score)
     score = update_score(score, computed_result)
 
     display_result(winning_msg, result_msg)
+    display_score(score)
 
     if game_over?(score)
       break score
