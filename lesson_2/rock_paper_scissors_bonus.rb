@@ -2,38 +2,38 @@ require 'set'
 
 MAX_WINS = 5
 
-VALID_CHOICES = %w[rock paper scissors lizard spock].freeze
+VALID_CHOICES = %w[rock paper scissors lizard spock]
 
 WINNING_CHOICES = [
   { player1: 'scissors', player2: 'paper' },
-  { player1: 'paper', player2: 'rock' },
-  { player1: 'rock', player2: 'lizard' },
-  { player1: 'lizard', player2: 'spock' },
-  { player1: 'spock', player2: 'scissors' },
+  { player1: 'paper',    player2: 'rock' },
+  { player1: 'rock',     player2: 'lizard' },
+  { player1: 'lizard',   player2: 'spock' },
+  { player1: 'spock',    player2: 'scissors' },
   { player1: 'scissors', player2: 'lizard' },
-  { player1: 'lizard', player2: 'paper' },
-  { player1: 'paper', player2: 'spock' },
-  { player1: 'spock', player2: 'rock' },
-  { player1: 'rock', player2: 'scissors' }
-].freeze
+  { player1: 'lizard',   player2: 'paper' },
+  { player1: 'paper',    player2: 'spock' },
+  { player1: 'spock',    player2: 'rock' },
+  { player1: 'rock',     player2: 'scissors' }
+]
 
 WINNING_MESSAGE = {
-  Set['scissors', 'paper'] => "Scissors cut Paper",
-  Set['paper', 'rock'] => "Paper covers Rock",
-  Set['rock', 'lizard'] => "Rock crushes Lizard",
-  Set['lizard', 'spock'] => "Lizard poisons Spock",
-  Set['spock', 'scissors'] => "Spock smashes Scissors",
+  Set['scissors', 'paper']  => "Scissors cut Paper",
+  Set['paper', 'rock']      => "Paper covers Rock",
+  Set['rock', 'lizard']     => "Rock crushes Lizard",
+  Set['lizard', 'spock']    => "Lizard poisons Spock",
+  Set['spock', 'scissors']  => "Spock smashes Scissors",
   Set['scissors', 'lizard'] => "Scissors decapitate Lizard",
-  Set['lizard', 'paper'] => "Lizard eats Paper",
-  Set['paper', 'spock'] => "Paper disproves Spock",
-  Set['spock', 'rock'] => "Spock vaporizes Rock",
-  Set['rock', 'scissors'] => "Rock crushes Scissors"
-}.freeze
+  Set['lizard', 'paper']    => "Lizard eats Paper",
+  Set['paper', 'spock']     => "Paper disproves Spock",
+  Set['spock', 'rock']      => "Spock vaporizes Rock",
+  Set['rock', 'scissors']   => "Rock crushes Scissors"
+}
 
 INITIAL_SCORE = {
   user: 0,
   computer: 0
-}.freeze
+}
 
 def prompt(message)
   puts "=> #{message}"
