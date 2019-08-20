@@ -102,6 +102,10 @@ def quit?
   !answer.downcase.start_with?('y')
 end
 
+def clear_screen
+  system('clear') || system('cls')
+end
+
 def game_over?(score)
   score.values.max >= MAX_WINS
 end
@@ -148,11 +152,11 @@ def play_game(score)
     display_result(winning_msg, result_msg)
     display_score(score)
 
-    if game_over?(score)
-      break score
-    elsif quit?
-      break false
+    if game_over?(score) then break score
+    elsif quit? then break false
     end
+
+    clear_screen
   end
 end
 
